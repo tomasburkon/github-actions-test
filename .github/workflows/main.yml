@@ -1,0 +1,20 @@
+name: Simple website
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build & Push Image
+      run: |
+        echo "${{ secret.DOCKERPWD }}" | docker login -u "tomasburkon" --password-stdin
+        docker image build -t tomasburkon/test-github-actions:v1 .
+        docker push tomasburkon/test-github-actions:v1
