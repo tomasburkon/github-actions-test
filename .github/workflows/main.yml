@@ -15,6 +15,6 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build & Push Image
       run: |
-        echo "${{ secret.DOCKERPWD }}" | docker login -u "tomasburkon" --password-stdin
+        echo "${{ secrets.DOCKERPWD }}" | docker login -u "tomasburkon" --password-stdin
         docker image build -t tomasburkon/test-github-actions:v1 .
         docker push tomasburkon/test-github-actions:v1
