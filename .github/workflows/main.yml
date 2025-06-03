@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Get Latest Tag
-      run: echo "VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+      run: echo "VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
     - name: Build & Push Image
       run: |
