@@ -13,8 +13,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Get Latest Tag
+      run: echo "VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+
     - name: Build & Push Image
       run: |
         echo "${{ secrets.DOCKERPWD }}" | docker login -u "tomasburkon" --password-stdin
-        docker image build -t tomasburkon/test-github-actions:v1 .
-        docker push tomasburkon/test-github-actions:v1
+        docker image build -t tomasburkon/test-github-actions:${{ env.VERSION }} .
+        docker push tomasburkon/test-github-actions:${{ env.VERSION }}
